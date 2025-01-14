@@ -12,7 +12,7 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://www.roblox.com/communities/5211428/Onetts-Testing-Group#!/about"], 
+        "matches": ["https://*.roblox.com/communities/5211428/("], 
         "js": ["content.js"]
       }
     ]
