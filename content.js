@@ -7,11 +7,12 @@ function startAutomation() {
     if (joinButton) {
       joinButton.click();
       console.log('Join button clicked!');
-      setTimeout(lookForCancelButton, 180000); // Wait for 3 minutes
+      // Wait for 3 minutes before looking for the Cancel Request button
+      setTimeout(lookForCancelButton, 180000);
     } else {
       console.log('Join button not found.');
     }
-  }, 1000);
+  }, 1000); // Check for the Join button every second
 }
 
 function lookForCancelButton() {
@@ -22,9 +23,11 @@ function lookForCancelButton() {
   if (cancelButton) {
     cancelButton.click();
     console.log('Cancel button clicked!');
-    setTimeout(startAutomation, 5000); // Wait for 5 seconds before restarting
+    // Wait for 5 seconds before restarting the automation process
+    setTimeout(startAutomation, 5000);
   } else {
-    console.log('Cancel button not found, retrying...');
+    console.log('Cancel button not found. Retrying...');
+    // Retry every second until the Cancel button is found
     setTimeout(lookForCancelButton, 1000);
   }
 }
@@ -41,8 +44,16 @@ document.addEventListener('stopAutomation', stopAutomation);
 // Listen for messages from the background script to control automation
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'start') {
-    startAutomation();
+    if (!interval) { // Prevent starting automation if it's already running
+      startAutomation();
+    } else {
+      console.log('Automation is already running.');
+    }
   } else if (message.action === 'stop') {
-    stopAutomation();
+    if (interval) {
+      stopAutomation();
+    } else {
+      console.log('Automation is not running.');
+    }
   }
 });
