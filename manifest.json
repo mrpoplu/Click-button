@@ -12,7 +12,7 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://*.roblox.com/communities/5211428/("], 
+        "matches": ["https://*.roblox.com/communities/5211428/*"], 
         "js": ["content.js"]
       }
     ]
