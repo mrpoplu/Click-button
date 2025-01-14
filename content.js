@@ -1,3 +1,4 @@
+console.log('started')
 let interval;
 
 function startAutomation() {
